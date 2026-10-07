@@ -29,10 +29,22 @@ function Sprout({ p, x, height, stem, leaf, scale = 1, lean = 0 }: SproutProps) 
   const topY = useTransform(len, (l) => SURFACE + 20 - height * l);
   const topX = useTransform(len, (l) => x + lean * l);
   const leafS = useTransform(p, leaf, [0, 1], { clamp: true });
-  const leafRotL = useTransform(leafS, [0, 1], [70, 0]);
-  const leafRotR = useTransform(leafS, [0, 1], [-70, 0]);
   const stemOpacity = useTransform(len, [0, 0.02], [0, 1]);
   const d = `M ${x} ${SURFACE + 20} C ${x} ${SURFACE - height * 0.4}, ${x + lean * 0.6} ${SURFACE - height * 0.7}, ${x + lean} ${SURFACE + 20 - height}`;
+  const leafPath = (side: number) =>
+    useTransform([len, leafS], ([l, o]: number[]) => {
+      const tx = x + lean * l;
+      const ty = SURFACE + 20 - height * l;
+      const size = 135 * o;
+      const ang = ((80 - 75 * o) * Math.PI) / 180; // from upright to open
+      const ex = tx + side * Math.cos(ang) * size;
+      const ey = ty - Math.sin(ang) * size;
+      const nx = -Math.sin(ang) * side, ny = -Math.cos(ang);
+      const w = size * 0.42;
+      return `M ${tx} ${ty} C ${tx + (ex - tx) * 0.3 + nx * w} ${ty + (ey - ty) * 0.3 + ny * w}, ${ex + nx * w * 0.6} ${ey + ny * w * 0.6}, ${ex} ${ey} C ${ex - nx * w * 0.5} ${ey - ny * w * 0.5}, ${tx + (ex - tx) * 0.4 - nx * w * 0.3} ${ty + (ey - ty) * 0.4 - ny * w * 0.3}, ${tx} ${ty} Z`;
+    });
+  const left = leafPath(-1);
+  const right = leafPath(1);
 
   return (
     <g style={{ transformOrigin: `${x}px ${SURFACE}px`, transform: `scale(${scale})` }}>
@@ -44,18 +56,8 @@ function Sprout({ p, x, height, stem, leaf, scale = 1, lean = 0 }: SproutProps) 
         fill="none"
         style={{ pathLength: len, opacity: stemOpacity }}
       />
-      <motion.g style={{ x: useTransform(topX, (v) => v - x), y: useTransform(topY, (v) => v - SURFACE), scale: leafS, transformOrigin: `${x}px ${SURFACE}px`, transformBox: "view-box" }}>
-        <motion.path
-          d={`M ${x} ${SURFACE} C ${x - 30} ${SURFACE - 55}, ${x - 120} ${SURFACE - 60}, ${x - 135} ${SURFACE - 20} C ${x - 120} ${SURFACE + 15}, ${x - 40} ${SURFACE + 10}, ${x} ${SURFACE} Z`}
-          fill="url(#leafGrad)"
-          style={{ rotate: leafRotL, transformOrigin: `${x}px ${SURFACE}px`, transformBox: "view-box" }}
-        />
-        <motion.path
-          d={`M ${x} ${SURFACE} C ${x + 30} ${SURFACE - 55}, ${x + 120} ${SURFACE - 60}, ${x + 135} ${SURFACE - 20} C ${x + 120} ${SURFACE + 15}, ${x + 40} ${SURFACE + 10}, ${x} ${SURFACE} Z`}
-          fill="url(#leafGrad)"
-          style={{ rotate: leafRotR, transformOrigin: `${x}px ${SURFACE}px`, transformBox: "view-box" }}
-        />
-      </motion.g>
+      <motion.path d={left} fill="url(#leafGrad)" style={{ opacity: leafS }} />
+      <motion.path d={right} fill="url(#leafGrad)" style={{ opacity: leafS }} />
     </g>
   );
 }
@@ -71,7 +73,7 @@ function Line({ p, t, r, first }: { p: MotionValue<number>; t: string[]; r: numb
   const opacity = useTransform(p, r, first ? [1, 1, 1, 0] : [0, 1, 1, 0]);
   const y = useTransform(p, r, first ? [0, 0, 0, -30] : [30, 0, 0, -30]);
   return (
-    <motion.h2 style={{ opacity, y }} className="absolute inset-x-0 text-5xl leading-[0.98] sm:text-6xl lg:text-8xl">
+    <motion.h2 style={{ opacity, y }} className="absolute inset-x-0 px-5 text-5xl md:px-10 xl:px-16 leading-[0.98] sm:text-6xl lg:text-8xl">
       {t[0]}
       <br />
       <em className="text-primary">{t[1]}</em>
@@ -92,8 +94,8 @@ export function GrowStory() {
   const soilY = useTransform(p, [0, 0.2], [0, -6]);
   const root = useTransform(p, [0.05, 0.38], [0, 1], { clamp: true });
   const rootSide = useTransform(p, [0.2, 0.45], [0, 1], { clamp: true });
-  const sceneScale = useTransform(p, [0, 0.55, 0.82], [1.15, 1, 0.45]);
-  const sceneOpacity = useTransform(p, [0.72, 0.82], [1, 0]);
+  const sceneScale = useTransform(p, [0, 0.55, 0.82], [1.15, 1, 0.82]);
+  const sceneOpacity = useTransform(p, [0.68, 0.78], [1, 0]);
   const trayOpacity = useTransform(p, [0.7, 0.8, 0.86, 0.9], [0, 1, 1, 0]);
   const trayScale = useTransform(p, [0.7, 0.9], [1.25, 1]);
   const harvestOpacity = useTransform(p, [0.86, 0.92], [0, 1]);
@@ -146,7 +148,7 @@ export function GrowStory() {
             ))}
             {/* hero sprout */}
             <Sprout p={p} x={800} height={300} stem={[0.24, 0.5]} leaf={[0.44, 0.6]} lean={6} />
-            <motion.ellipse cx="800" cy={SURFACE + 32} rx="22" ry="15" fill="url(#seedGrad)" style={{ opacity: seedOpacity }} />
+            <motion.ellipse cx="800" cy={SURFACE + 32} rx="30" ry="20" fill="url(#seedGrad)" style={{ opacity: seedOpacity }} />
           </svg>
         </motion.div>
 
@@ -157,7 +159,7 @@ export function GrowStory() {
 
         {/* Headlines */}
         <div className="pointer-events-none absolute inset-x-0 top-24 md:top-28">
-          <div className="container-x relative h-56 md:h-72">
+          <div className="relative mx-auto h-56 max-w-[88rem] md:h-72">
             {lines.map((l, i) => (
               <Line key={i} p={p} t={l.t} r={l.r} first={i === 0} />
             ))}
