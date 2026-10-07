@@ -93,12 +93,12 @@ function Index() {
 function Hero() {
   return (
     <section id="home" className="relative overflow-hidden pt-28 pb-16 md:pt-36 lg:pb-24">
-      <SprigDecor className="pointer-events-none absolute -left-6 top-40 hidden h-72 text-sage md:block" />
+      <SprigDecor className="pointer-events-none absolute bottom-6 left-[46%] hidden h-56 text-sage lg:block" />
       <div className="container-x grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-6">
           <Reveal><p className="eyebrow">Fresh • Local • Nutrient-rich</p></Reveal>
           <Reveal delay={100}>
-            <h1 className="mt-6 text-[3.1rem] leading-[0.95] sm:text-7xl lg:text-[6.5rem]">
+            <h1 className="mt-6 text-[3.1rem] leading-[0.95] sm:text-7xl lg:text-[5.6rem]">
               Small Greens.<br />
               <em className="text-primary">Big Nutrition.</em>
             </h1>
