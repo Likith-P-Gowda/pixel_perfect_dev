@@ -113,7 +113,7 @@ function Hero() {
             <Btn href="#story" variant="ghost">Our Story</Btn>
           </Reveal>
           <Reveal delay={400} className="mt-12 flex gap-10 border-t border-border pt-6">
-            {[["7–10", "days seed to harvest"], ["0 km", "pesticides, ever"], ["24h", "harvest to door"]].map(([n, l]) => (
+            {[["7–10", "days seed to harvest"], ["Zero", "pesticides, ever"], ["24h", "harvest to door"]].map(([n, l]) => (
               <div key={l} className="min-w-0">
                 <p className="font-serif text-3xl text-primary">{n}</p>
                 <p className="mt-1 text-xs text-muted-foreground">{l}</p>
