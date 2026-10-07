@@ -8,3 +8,4 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+- The home opening is a sticky, scroll-linked story (framer-motion useScroll/useTransform) in GrowStory.tsx; growth is SVG over a soil photo, then crossfades to photos — keeps it smooth and light.
