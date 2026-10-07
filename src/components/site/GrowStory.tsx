@@ -30,7 +30,8 @@ function Sprout({ p, x, height, stem, leaf, scale = 1, lean = 0 }: SproutProps) 
   const stemOpacity = useTransform(len, [0, 0.02], [0, 1]);
   const d = `M ${x} ${SURFACE + 20} C ${x} ${SURFACE - height * 0.4}, ${x + lean * 0.6} ${SURFACE - height * 0.7}, ${x + lean} ${SURFACE + 20 - height}`;
   const leafPath = (side: number) =>
-    useTransform([len, leafS], ([l, o]: number[]) => {
+    useTransform([len, leafS], (v: number[]) => {
+      const l = v[0] ?? 0, o = v[1] ?? 0;
       const tx = x + lean * l;
       const ty = SURFACE + 20 - height * l;
       const size = 135 * o;
