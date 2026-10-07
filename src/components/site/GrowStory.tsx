@@ -128,8 +128,8 @@ export function GrowStory() {
                 <stop offset="1" stopColor="oklch(0.5 0.12 148)" />
               </radialGradient>
               <radialGradient id="seedGrad" cx="0.35" cy="0.35" r="0.8">
-                <stop offset="0" stopColor="oklch(0.62 0.07 60)" />
-                <stop offset="1" stopColor="oklch(0.3 0.04 50)" />
+                <stop offset="0" stopColor="oklch(0.86 0.06 80)" />
+                <stop offset="1" stopColor="oklch(0.6 0.08 65)" />
               </radialGradient>
             </defs>
             <motion.g style={{ y: soilY }}>
