@@ -44,16 +44,16 @@ function Sprout({ p, x, height, stem, leaf, scale = 1, lean = 0 }: SproutProps) 
         fill="none"
         style={{ pathLength: len, opacity: stemOpacity }}
       />
-      <motion.g style={{ x: useTransform(topX, (v) => v - x), y: useTransform(topY, (v) => v - SURFACE), scale: leafS, originX: `${x}px`, originY: `${SURFACE}px` }}>
+      <motion.g style={{ x: useTransform(topX, (v) => v - x), y: useTransform(topY, (v) => v - SURFACE), scale: leafS, transformOrigin: `${x}px ${SURFACE}px`, transformBox: "view-box" }}>
         <motion.path
           d={`M ${x} ${SURFACE} C ${x - 30} ${SURFACE - 55}, ${x - 120} ${SURFACE - 60}, ${x - 135} ${SURFACE - 20} C ${x - 120} ${SURFACE + 15}, ${x - 40} ${SURFACE + 10}, ${x} ${SURFACE} Z`}
           fill="url(#leafGrad)"
-          style={{ rotate: leafRotL, originX: `${x}px`, originY: `${SURFACE}px` }}
+          style={{ rotate: leafRotL, transformOrigin: `${x}px ${SURFACE}px`, transformBox: "view-box" }}
         />
         <motion.path
           d={`M ${x} ${SURFACE} C ${x + 30} ${SURFACE - 55}, ${x + 120} ${SURFACE - 60}, ${x + 135} ${SURFACE - 20} C ${x + 120} ${SURFACE + 15}, ${x + 40} ${SURFACE + 10}, ${x} ${SURFACE} Z`}
           fill="url(#leafGrad)"
-          style={{ rotate: leafRotR, originX: `${x}px`, originY: `${SURFACE}px` }}
+          style={{ rotate: leafRotR, transformOrigin: `${x}px ${SURFACE}px`, transformBox: "view-box" }}
         />
       </motion.g>
     </g>

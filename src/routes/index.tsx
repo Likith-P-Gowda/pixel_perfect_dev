@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight, Leaf, MapPin, Sprout, Scissors, HeartHandshak
 import { Navbar } from "@/components/site/Navbar";
 import { Logo } from "@/components/site/Logo";
 import { Reveal } from "@/components/site/Reveal";
+import { GrowStory } from "@/components/site/GrowStory";
 
 import hero from "@/assets/hero.jpg";
 import pBroccoli from "@/assets/p-broccoli.jpg";
@@ -73,7 +74,7 @@ function Index() {
     <>
       <Navbar />
       <main>
-        <Hero />
+        <GrowStory />
         <Trust />
         <Products />
         <Why />
@@ -87,55 +88,6 @@ function Index() {
       </main>
       <Footer />
     </>
-  );
-}
-
-function Hero() {
-  return (
-    <section id="home" className="relative overflow-hidden pt-28 pb-16 md:pt-36 lg:pb-24">
-      <SprigDecor className="pointer-events-none absolute bottom-6 left-[46%] hidden h-56 text-sage lg:block" />
-      <div className="container-x grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-6">
-          <Reveal><p className="eyebrow">Fresh • Local • Nutrient-rich</p></Reveal>
-          <Reveal delay={100}>
-            <h1 className="mt-6 text-[3.1rem] leading-[0.95] sm:text-7xl lg:text-[5.6rem]">
-              Small Greens.<br />
-              <em className="text-primary">Big Nutrition.</em>
-            </h1>
-          </Reveal>
-          <Reveal delay={200}>
-            <p className="mt-7 max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
-              Fresh microgreens grown with care, harvested at their peak, and brought closer to your plate.
-            </p>
-          </Reveal>
-          <Reveal delay={300} className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Btn href="#microgreens">Explore Microgreens</Btn>
-            <Btn href="#story" variant="ghost">Our Story</Btn>
-          </Reveal>
-          <Reveal delay={400} className="mt-12 flex gap-10 border-t border-border pt-6">
-            {[["7–10", "days seed to harvest"], ["Zero", "pesticides, ever"], ["24h", "harvest to door"]].map(([n, l]) => (
-              <div key={l} className="min-w-0">
-                <p className="font-serif text-3xl text-primary">{n}</p>
-                <p className="mt-1 text-xs text-muted-foreground">{l}</p>
-              </div>
-            ))}
-          </Reveal>
-        </div>
-        <Reveal delay={200} className="relative lg:col-span-6">
-          <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-sage-light blur-2xl" aria-hidden />
-          <div className="relative overflow-hidden rounded-[2rem] shadow-soft">
-            <img src={hero} alt="Close-up of fresh microgreens growing in a tray" width={1200} height={1440} className="aspect-[4/5] w-full object-cover" />
-          </div>
-          <div className="absolute -bottom-6 left-4 right-4 flex items-center gap-4 rounded-2xl bg-card/95 p-4 shadow-lift backdrop-blur sm:left-auto sm:right-[-1rem] sm:w-72">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-sage-light text-primary"><Leaf className="h-5 w-5" /></span>
-            <div className="min-w-0">
-              <p className="text-sm font-semibold">Harvested this morning</p>
-              <p className="text-xs text-muted-foreground">Cut fresh, never stored for days.</p>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-    </section>
   );
 }
 
