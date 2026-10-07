@@ -26,8 +26,6 @@ type SproutProps = {
 
 function Sprout({ p, x, height, stem, leaf, scale = 1, lean = 0 }: SproutProps) {
   const len = useTransform(p, stem, [0, 1], { clamp: true });
-  const topY = useTransform(len, (l) => SURFACE + 20 - height * l);
-  const topX = useTransform(len, (l) => x + lean * l);
   const leafS = useTransform(p, leaf, [0, 1], { clamp: true });
   const stemOpacity = useTransform(len, [0, 0.02], [0, 1]);
   const d = `M ${x} ${SURFACE + 20} C ${x} ${SURFACE - height * 0.4}, ${x + lean * 0.6} ${SURFACE - height * 0.7}, ${x + lean} ${SURFACE + 20 - height}`;
